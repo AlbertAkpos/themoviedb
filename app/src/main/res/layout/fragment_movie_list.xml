@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.MovieListFragment">
+
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/firstLoadIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        app:indicatorColor="@color/purple_200"
+        app:indicatorSize="80dp"
+        app:trackThickness="@dimen/sm"
+        app:trackCornerRadius="8dp"
+        android:indeterminate="true"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movieList"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:listitem="@layout/movie_item"
+        app:spanCount="2"
+        android:paddingEnd="@dimen/sm"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        />
+
+    <ProgressBar
+        android:id="@+id/loadingMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        />
+
+</LinearLayout>
