@@ -29,8 +29,7 @@ internal class MovieAdapter(private val onMovieClicked: (movie: Domain.Movie) ->
         fun bind(movie: Domain.Movie, onMovieClicked: (movie: Domain.Movie) -> Unit) {
             binding.title.text = movie.title
             binding.overview.text = movie.overview
-            val imageUrl = BuildConfig.IMAGE_BASE_URL + movie.imageUrl
-            binding.image.loadImage(imageUrl)
+            binding.image.loadImage( movie.imageUrl)
             binding.container.setOnClickListener { onMovieClicked(movie) }
 
             val aboveThreshold = movie.voteAverage > 8
@@ -55,7 +54,7 @@ internal class MovieAdapter(private val onMovieClicked: (movie: Domain.Movie) ->
 
     private class DiffCallback: DiffUtil.ItemCallback<Domain.Movie>() {
         override fun areItemsTheSame(oldItem: Domain.Movie, newItem: Domain.Movie): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Domain.Movie, newItem: Domain.Movie): Boolean {

@@ -6,13 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.alberto.themoviedb.R
 import com.alberto.themoviedb.data.models.Domain
 import com.alberto.themoviedb.databinding.FragmentMovieListBinding
 import com.alberto.themoviedb.helper.ResultState
 import com.alberto.themoviedb.helper.extensions.show
 import com.alberto.themoviedb.helper.extensions.showDialog
+import com.alberto.themoviedb.helper.extensions.toJson
 import com.alberto.themoviedb.helper.extensions.visibleIf
+import com.alberto.themoviedb.helper.getNavBuilderWithAnimations
 import com.alberto.themoviedb.ui.adapter.MovieAdapter
 import com.alberto.themoviedb.ui.viewmodel.MovieVM
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,9 +51,10 @@ class MovieListFragment : Fragment() {
         setObservers()
     }
 
+    var some = false
     private fun setObservers() {
         viewModel.movieState.observe(viewLifecycleOwner) {
-            val state = it ?: return@observe
+            val state = it.getContentIfNotHandled() ?: return@observe
             when(state) {
                 is ResultState.Loading -> handleLoading(true)
                 is ResultState.Error -> {
@@ -62,7 +67,6 @@ class MovieListFragment : Fragment() {
                     handleLoading(false)
                     val list = movieAdapter.currentList + state.data
                     movieAdapter.submitList(list)
-
                 }
             }
         }
@@ -89,12 +93,15 @@ class MovieListFragment : Fragment() {
         if (currentPage > 1) {
             binding.loadingMore.visibleIf(loading)
         } else {
-            binding.movieList.show()
+           // binding.movieList.show()
             binding.firstLoadIndicator.visibleIf(loading)
         }
     }
 
     private fun onMovieClicked(movie: Domain.Movie) {
-
+        val bundle = Bundle().apply {
+            putString(MovieDetailFragment.BUNDLE_KEY, movie.toJson())
+        }
+        findNavController().navigate(R.id.movieDetailFragment, bundle, getNavBuilderWithAnimations().build())
     }
 }

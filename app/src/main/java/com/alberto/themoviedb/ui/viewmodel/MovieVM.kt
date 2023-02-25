@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.alberto.themoviedb.data.interfaces.IRepository
 import com.alberto.themoviedb.data.models.Domain
 import com.alberto.themoviedb.helper.ErrorHandler
+import com.alberto.themoviedb.helper.Event
 import com.alberto.themoviedb.helper.ResultState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -17,7 +18,7 @@ internal class MovieVM @Inject constructor (private val repository: IRepository)
 
     var currentPage = 0
 
-    val movieState = MutableLiveData<ResultState<List<Domain.Movie>>>()
+    val movieState = MutableLiveData<Event<ResultState<List<Domain.Movie>>>>()
 
 
     fun fetchMovies() {
@@ -27,13 +28,13 @@ internal class MovieVM @Inject constructor (private val repository: IRepository)
             currentPage--
             throwable.printStackTrace()
             val message = ErrorHandler.handleException(throwable)
-            movieState.postValue(ResultState.Error(message))
+            movieState.postValue(Event(ResultState.Error(message)))
         }
 
         viewModelScope.launch(handler) {
-            movieState.postValue(ResultState.Loading())
+            movieState.postValue(Event(ResultState.Loading()))
             val response = repository.fetchMovies(currentPage)
-            movieState.postValue(ResultState.Success(response))
+            movieState.postValue(Event(ResultState.Success(response)))
         }
     }
 }

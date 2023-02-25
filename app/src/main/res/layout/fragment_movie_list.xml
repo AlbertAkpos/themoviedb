@@ -26,8 +26,6 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"
-        android:visibility="gone"
-        tools:visibility="visible"
         tools:listitem="@layout/movie_item"
         app:spanCount="2"
         android:paddingEnd="@dimen/sm"

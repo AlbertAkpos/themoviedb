@@ -15,6 +15,7 @@ internal object Local {
         @ColumnInfo(name = "overview") val overview: String,
         @ColumnInfo(name = "imageUrl") val imageUrl: String,
         @ColumnInfo(name = "page") val page: Int,
-        @ColumnInfo(name = "voteAverage") val voteAverage: Float
+        @ColumnInfo(name = "voteAverage") val voteAverage: Float,
+        @ColumnInfo(name = "backDropImage") val backDropImage: String
     )
 }

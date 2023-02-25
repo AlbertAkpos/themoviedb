@@ -10,4 +10,9 @@
         android:name="com.alberto.themoviedb.ui.MovieListFragment"
         android:label="fragment_movie_list"
         tools:layout="@layout/fragment_movie_list" />
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.alberto.themoviedb.ui.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" />
 </navigation>
