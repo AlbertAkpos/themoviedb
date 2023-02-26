@@ -37,4 +37,19 @@ internal class MovieVM @Inject constructor (private val repository: IRepository)
             movieState.postValue(Event(ResultState.Success(response)))
         }
     }
+
+
+    val moviePicturesState = MutableLiveData<Event<ResultState<List<Domain.Picture>>>>()
+
+    fun fetchMoviePictures(movieId: String) {
+        val handler = CoroutineExceptionHandler { _, throwable ->
+            throwable.printStackTrace()
+        }
+
+        viewModelScope.launch(handler) {
+            val response = repository.fetchMoviePictures(movieId)
+            val pictures = if (response.size > 5) response.subList(0, 5) else response
+            moviePicturesState.postValue(Event(ResultState.Success(pictures)))
+        }
+    }
 }

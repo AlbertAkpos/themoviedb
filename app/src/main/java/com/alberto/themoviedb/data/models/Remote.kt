@@ -24,4 +24,12 @@ object Remote {
         @SerializedName("vote_average") val voteAverage: Float?,
         @SerializedName("vote_count") val voteCount: Long?
     )
+
+    data class MoviePicturesResponse(
+        @SerializedName("backdrops") val backdrops: List<Picture>?
+    )
+
+    data class Picture(
+        @SerializedName("file_path") val filePath: String?
+    )
 }

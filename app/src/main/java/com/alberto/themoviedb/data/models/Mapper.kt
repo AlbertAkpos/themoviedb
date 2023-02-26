@@ -27,3 +27,9 @@ internal fun Local.Movie.domain(): Domain.Movie {
         backDropImage = backDropImage
     )
 }
+
+internal fun Remote.MoviePicturesResponse.domain(): List<Domain.Picture> {
+    return backdrops?.map {
+        Domain.Picture(imageUrl = BuildConfig.IMAGE_BASE_URL + it.filePath.toString())
+    } ?: emptyList()
+}

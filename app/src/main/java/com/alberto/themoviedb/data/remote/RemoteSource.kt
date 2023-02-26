@@ -9,4 +9,8 @@ class RemoteSource @Inject constructor (private val service: MovieService): IRem
     override suspend fun fetchMovies(page: Int): Remote.PopularMoviesResponse {
         return service.fetchPopularMovies(page)
     }
+
+    override suspend fun fetchMoviePictures(movieId: String): Remote.MoviePicturesResponse {
+        return service.fetchMovieImages(movieId)
+    }
 }

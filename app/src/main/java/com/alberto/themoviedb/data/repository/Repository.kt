@@ -27,4 +27,8 @@ internal class Repository @Inject constructor (private val localSource: ILocalSo
         }
 
     }
+
+    override suspend fun fetchMoviePictures(movieId: String): List<Domain.Picture> = withContext(dispatcher) {
+        remoteSource.fetchMoviePictures(movieId).domain()
+    }
 }

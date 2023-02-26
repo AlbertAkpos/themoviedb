@@ -9,4 +9,8 @@ internal object Domain {
         val voteAverage: Float,
         val backDropImage: String
     )
+
+    data class Picture(
+        val imageUrl: String
+    )
 }
