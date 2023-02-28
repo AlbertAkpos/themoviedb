@@ -16,6 +16,7 @@
         android:layout_gravity="center"
         app:indicatorColor="@color/purple_200"
         app:indicatorSize="80dp"
+        android:layout_marginTop="@dimen/md"
         app:trackThickness="@dimen/sm"
         app:trackCornerRadius="8dp"
         android:indeterminate="true"

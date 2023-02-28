@@ -19,6 +19,7 @@ import com.alberto.themoviedb.helper.extensions.visibleIf
 import com.alberto.themoviedb.helper.getNavBuilderWithAnimations
 import com.alberto.themoviedb.ui.adapter.MovieAdapter
 import com.alberto.themoviedb.ui.viewmodel.MovieVM
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -99,6 +100,7 @@ class MovieListFragment : Fragment() {
     }
 
     private fun onMovieClicked(movie: Domain.Movie) {
+        Snackbar.make(binding.root, movie.title, Snackbar.LENGTH_SHORT).show()
         val bundle = Bundle().apply {
             putString(MovieDetailFragment.BUNDLE_KEY, movie.toJson())
         }
